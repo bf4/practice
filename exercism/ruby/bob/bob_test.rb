@@ -70,6 +70,10 @@ begin
     def test_prolonged_silence
       assert_equal 'Fine. Be that way!', teenager.hey('    ')
     end
+
+    def test_didnt_understand
+      assert_equal 'No comprendo.', teenager.hey(' Aaa   ')
+    end
   end
 
 rescue LoadError => e

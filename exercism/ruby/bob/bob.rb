@@ -13,7 +13,8 @@ class Bob
   # @param msg [String] The message Bob is responding to
   # @return response [String] Bob's response to the message
   def hey(msg)
-    @responses.fetch(message_type(msg))
+    # re: No comprendo, see https://github.com/kytrinyx/exercism.io/pull/420
+    @responses.fetch(message_type(msg)) { "No comprendo." }
   end
 
   private
