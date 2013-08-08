@@ -1,20 +1,14 @@
 class Bob
 
-  def initialize
-    @responses = {
-    :silent    => "Fine. Be that way!",
-    :shout     => "Woah, chill out!",
-    :question  => "Sure.",
-    :statement => "Whatever.",
-    :demand    => "Whatever.",
-    }
-  end
-
   # @param msg [String] The message Bob is responding to
   # @return response [String] Bob's response to the message
   def hey(msg)
-    # re: No comprendo, see https://github.com/kytrinyx/exercism.io/pull/420
-    @responses.fetch(message_type(msg)) { "No comprendo." }
+    case message_type(msg)
+    when :silent   then "Fine. Be that way!"
+    when :shout    then "Woah, chill out!"
+    when :question then "Sure."
+    else                "Whatever."
+    end
   end
 
   private

@@ -72,7 +72,7 @@ begin
     end
 
     def test_didnt_understand
-      assert_equal 'No comprendo.', teenager.hey(' Aaa   ')
+      assert_equal 'Whatever.', teenager.hey(' Aaa   ')
     end
   end
 
