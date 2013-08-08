@@ -1,6 +1,6 @@
 class Bob
   RESPONSES = {
-    :dismissal    => "Fine. Be that way.",
+    :dismissal    => "Fine. Be that way!",
     :serenity     => "Woah, chill out!",
     :acceptance   => "Sure.",
     :indifference => "Whatever.",
@@ -68,7 +68,7 @@ class Bob
     end
 
     def silence?
-      msg.nil? || msg == ''
+      msg.nil? || msg.strip == ''
     end
 
   end
