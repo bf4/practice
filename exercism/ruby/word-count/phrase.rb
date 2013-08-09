@@ -6,11 +6,18 @@ class Phrase
   end
 
   def word_count
-    @word.split(/[^A-Za-z0-9]/).each do |word|
-      @result[word.downcase] += 1 unless word.empty?
+    words.each do |word|
+      @result[word.downcase] += 1
     end
     @word = ''
     @result
   end
+
+  private
+
+  def words
+    @word.split(/[^A-Za-z0-9]/).reject(&:empty?)
+  end
+
 
 end
