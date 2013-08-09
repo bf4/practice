@@ -15,7 +15,7 @@ WordCounter = Struct.new(:phrase) do
   # @return [Array] of words in the phrase
   # @note Words are normalized by downcasing them
   def words
-    @words ||= phrase.scan(word_expression).map(&:downcase)
+    @words ||= phrase.downcase.scan(word_expression)
   end
 
   # @return [Hash] of words and their frequncy
@@ -40,6 +40,6 @@ WordCounter = Struct.new(:phrase) do
   #   I started with String#split but decided I liked String#scan
   #   to positively select words rather than splitting on non-words
   def word_expression
-    /[[:alnum:]]+/o
+    /[[:alnum:]]+/
   end
 end
