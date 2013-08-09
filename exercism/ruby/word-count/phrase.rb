@@ -24,11 +24,18 @@ WordCounter = Struct.new(:sentance) do
 
   private
 
+  # @note Sets the default value for an unset key to :value
+  #   complicated looking enough that I gave it its own method
+  #   or fancypants: Hash.new {|hash,k| hash[k] = value}
   def hash_with_default(value)
-    Hash.new {|hash,k| hash[k] = value}
+    Hash.new(value)
   end
 
-  # see http://www.geocities.jp/kosako3/oniguruma/doc/RE.txt
+  # @see http://www.geocities.jp/kosako3/oniguruma/doc/RE.txt
+  # @note I'd like to use a character class, but I couldn't figure it out
+  #   I also toyed with String#unpack which was hopeless
+  #   I started with String#split but decided I liked String#scan
+  #   to positively select words rather than splitting on non-words
   def word_expression
     /[A-Za-z0-9]+/o
   end
