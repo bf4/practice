@@ -1,39 +1,49 @@
 class Bob
 
-  attr_reader :drivel
-
   # @param drivel [String] The drivel Bob is responding to
   # @return response [String] Bob's response to the drivel
   def hey(drivel)
     @drivel = drivel
     case
-    when silence?   then "Fine. Be that way!"
-    when shouting?  then "Woah, chill out!"
-    when asking?    then "Sure."
-    else                 "Whatever."
+    when silence?   then annoyed
+    when shouting?  then alarmed
+    when asking?    then resigned
+    else                 indifferent
     end
   end
 
   private
 
+  def drivel
+    @drivel
+  end
+
+  def silence?
+    drivel.nil? || drivel.strip == ''
+  end
+
+  def annoyed
+    "Fine. Be that way!"
+  end
+
   def shouting?
     drivel.upcase == drivel
   end
 
-  def stating?
-    drivel.end_with?('.')
+  def alarmed
+    "Woah, chill out!"
   end
 
   def asking?
     drivel.end_with?('?')
   end
 
-  def demanding?
-    drivel.end_with?('!')
+  def resigned
+    "Sure."
   end
 
-  def silence?
-    drivel.nil? || drivel.strip == ''
+  def indifferent
+    "Whatever."
   end
 
 end
