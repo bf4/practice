@@ -5,10 +5,10 @@ class Bob
   def hey(drivel)
     @drivel = drivel
     case
-    when silence?   then annoyed
-    when shouting?  then alarmed
-    when asking?    then resigned
-    else                 indifferent
+    when silent_drivel? then annoyed_response
+    when yelled_drivel? then alarmed_response
+    when asked_drivel?  then resigned_response
+    else                indifferent_response
     end
   end
 
@@ -18,31 +18,31 @@ class Bob
     @drivel
   end
 
-  def silence?
-    drivel.nil? || drivel.strip == ''
+  def silent_drivel?
+    drivel.to_s.strip == ''
   end
 
-  def annoyed
+  def annoyed_response
     "Fine. Be that way!"
   end
 
-  def shouting?
+  def yelled_drivel?
     drivel.upcase == drivel
   end
 
-  def alarmed
+  def alarmed_response
     "Woah, chill out!"
   end
 
-  def asking?
+  def asked_drivel?
     drivel.end_with?('?')
   end
 
-  def resigned
+  def resigned_response
     "Sure."
   end
 
-  def indifferent
+  def indifferent_response
     "Whatever."
   end
 
