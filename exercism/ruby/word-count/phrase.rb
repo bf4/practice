@@ -10,12 +10,15 @@ class Phrase
 
 end
 
-WordCounter = Struct.new(:sentance) do
+WordCounter = Struct.new(:sentence) do
 
+  # @return [Array] of words in the sentence
   def words
-    @words ||= sentance.scan(word_expression)
+    @words ||= sentence.scan(word_expression)
   end
 
+  # @return [Hash] of words and their frequncy
+  # Words are normalized by downcasing them
   def word_count
     words.each_with_object(hash_with_default(0)) do |word, counter|
       counter[word.downcase] += 1
