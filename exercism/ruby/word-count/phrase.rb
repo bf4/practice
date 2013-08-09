@@ -13,7 +13,7 @@ end
 WordCounter = Struct.new(:sentance) do
 
   def words
-    @words ||= sentance.split(/[^A-Za-z0-9]/).reject(&:empty?)
+    @words ||= sentance.split(non_word_expression).reject(&:empty?)
   end
 
   def word_count
@@ -28,4 +28,8 @@ WordCounter = Struct.new(:sentance) do
     Hash.new {|hash,k| hash[k] = value}
   end
 
+  # see http://www.geocities.jp/kosako3/oniguruma/doc/RE.txt
+  def non_word_expression
+    /[^A-Za-z0-9]/o
+  end
 end
