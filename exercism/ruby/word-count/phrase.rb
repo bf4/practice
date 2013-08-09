@@ -1,20 +1,20 @@
 class Phrase
 
-  def initialize(word)
-    @word = word
+  def initialize(phrase)
+    @phrase = phrase
   end
 
   def word_count
-    WordCounter.new(@word).word_count
+    WordCounter.new(@phrase).word_count
   end
 
 end
 
-WordCounter = Struct.new(:sentence) do
+WordCounter = Struct.new(:phrase) do
 
-  # @return [Array] of words in the sentence
+  # @return [Array] of words in the phrase
   def words
-    @words ||= sentence.scan(word_expression)
+    @words ||= phrase.scan(word_expression)
   end
 
   # @return [Hash] of words and their frequncy
