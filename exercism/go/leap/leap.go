@@ -6,10 +6,8 @@ import (
 
 func IsLeapYear(year int) bool {
 	year64 := float64(year)
-	if isExceptionalCentury(year64) {
-		return true
-	} else if isCentury(year64) {
-		return false
+	if isCentury(year64) {
+		return isExceptionalCentury(year64)
 	} else {
 		return isVanillaLeapYear(year64)
 	}
