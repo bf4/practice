@@ -4,17 +4,15 @@ import (
 	"math"
 )
 
-func IsLeapYear(year int) (answer bool) {
+func IsLeapYear(year int) bool {
 	year64 := float64(year)
-	answer = false
-	if isVanillaLeapYear(year64) {
-		if isCentury(year64) {
-			answer = isExceptionalCentury(year64)
-		} else {
-			answer = true
-		}
+	if isExceptionalCentury(year64) {
+		return true
+	} else if isCentury(year64) {
+		return false
+	} else {
+		return isVanillaLeapYear(year64)
 	}
-	return answer
 }
 
 func isVanillaLeapYear(year64 float64) bool {
