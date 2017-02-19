@@ -16,6 +16,12 @@ year, but 2000 is.
 If your language provides a method in the standard library that does
 this look-up, pretend it doesn't exist and implement it yourself.
 
+## Testing
+
+```sh
+ go test -bench=LeapYears -run=LeapYears -v
+```
+
 ## Notes
 
 For a delightful, four minute explanation of the whole leap year
