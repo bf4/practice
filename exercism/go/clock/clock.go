@@ -1,26 +1,47 @@
-// Clock stub file
-
-// To use the right term, this is the package *clause*.
-// You can document general stuff about the package here if you like.
 package clock
 
-// The value of testVersion here must match `targetTestVersion` in the file
-// clock_test.go.
+import "fmt"
+
 const testVersion = 4
 
-// Clock API as stub definitions.  No, it doesn't compile yet.
-// More details and hints are in clock_test.go.
-
-type Clock // Complete the type definition.  Pick a suitable data type.
+type Clock struct {
+	Hour, Minute int
+}
 
 func New(hour, minute int) Clock {
+	adjustMinute := func(m int) int {
+		for {
+			if m < 0 {
+				hour -= 1
+				m = m + 60
+			} else if m < 60 {
+				return m
+			} else {
+				hour += 1
+				m = m - 60
+			}
+		}
+	}
+	minute = adjustMinute(minute)
+	adjustHour := func(h int) int {
+		for {
+			if h < 0 {
+				h = h + 24
+			} else if h < 24 {
+				return h
+			} else {
+				h = h - 24
+			}
+		}
+	}
+	hour = adjustHour(hour)
+	return Clock{hour, minute}
 }
 
-func (Clock) String() string {
+func (c Clock) String() string {
+	return fmt.Sprintf("%0.2d:%0.2d", c.Hour, c.Minute)
 }
 
-func (Clock) Add(minutes int) Clock {
+func (c Clock) Add(minutes int) Clock {
+	return New(c.Hour, c.Minute+minutes)
 }
-
-// Remember to delete all of the stub comments.
-// They are just noise, and reviewers will complain.
