@@ -4,44 +4,23 @@ import "fmt"
 
 const testVersion = 4
 
-type Clock struct {
-	Hour, Minute int
-}
+type Clock int
 
 func New(hour, minute int) Clock {
-	adjustMinute := func(m int) int {
-		for {
-			if m < 0 {
-				hour -= 1
-				m = m + 60
-			} else if m < 60 {
-				return m
-			} else {
-				hour += 1
-				m = m - 60
-			}
-		}
+	minutes_per_day := 60 * 24
+	minutes := hour*60 + minute
+	minute_in_day := minutes % minutes_per_day
+	c := Clock(minute_in_day)
+	if c < 0 {
+		c = New(0, int(c)+minutes_per_day)
 	}
-	minute = adjustMinute(minute)
-	adjustHour := func(h int) int {
-		for {
-			if h < 0 {
-				h = h + 24
-			} else if h < 24 {
-				return h
-			} else {
-				h = h - 24
-			}
-		}
-	}
-	hour = adjustHour(hour)
-	return Clock{hour, minute}
+	return c
 }
 
 func (c Clock) String() string {
-	return fmt.Sprintf("%0.2d:%0.2d", c.Hour, c.Minute)
+	return fmt.Sprintf("%0.2d:%0.2d", c/60, c%60)
 }
 
 func (c Clock) Add(minutes int) Clock {
-	return New(c.Hour, c.Minute+minutes)
+	return New(0, int(c)+minutes)
 }
