@@ -7,12 +7,12 @@ const testVersion = 4
 type Clock int
 
 func New(hour, minute int) Clock {
-	minutes_per_day := 60 * 24
+	minutesPerDay := 60 * 24
 	minutes := hour*60 + minute
-	minute_in_day := minutes % minutes_per_day
-	c := Clock(minute_in_day)
+	minuteInDay := minutes % minutesPerDay
+	c := Clock(minuteInDay)
 	if c < 0 {
-		c = New(0, int(c)+minutes_per_day)
+		c = New(0, int(c)+minutesPerDay)
 	}
 	return c
 }
